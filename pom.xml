@@ -6,7 +6,7 @@
 	<groupId>com.github.xjs</groupId>
 	<artifactId>springboot-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>springboot-demo</name>
 	<description>Demo project for Spring Boot</description>
@@ -69,11 +69,13 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.7.0</version>
+			<scope>${swagger.scope}</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.7.0</version>
+			<scope>${swagger.scope}</scope>
 		</dependency>
 
 		<dependency>
@@ -84,6 +86,26 @@
 
 	</dependencies>
 
+	<profiles>
+			<profile>
+				<id>default</id>
+				<properties>
+					<profiles.active>default</profiles.active>
+					<swagger.scope>compile</swagger.scope>
+				</properties>
+				<activation>
+					<activeByDefault>true</activeByDefault>
+				</activation>
+			</profile>
+			<profile>
+				<id>product</id>
+				<properties>
+					<profiles.active>product</profiles.active>
+					<swagger.scope>provided</swagger.scope>
+				</properties>
+			</profile>
+		</profiles>
+	
 	<build>
 		<resources>
 			<resource>
